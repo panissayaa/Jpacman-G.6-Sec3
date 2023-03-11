@@ -17,9 +17,7 @@ import nl.tudelft.jpacman.npc.ghost.GhostFactory;
 import nl.tudelft.jpacman.points.PointCalculator;
 import nl.tudelft.jpacman.points.PointCalculatorLoader;
 import nl.tudelft.jpacman.sprite.PacManSprites;
-import nl.tudelft.jpacman.ui.Action;
-import nl.tudelft.jpacman.ui.PacManUI;
-import nl.tudelft.jpacman.ui.PacManUiBuilder;
+import nl.tudelft.jpacman.ui.*;
 
 /**
  * Creates and launches the JPacMan UI.
@@ -36,6 +34,9 @@ public class Launcher {
 
     private PacManUI pacManUI;
     private Game game;
+    private PacManUI pacManThem1;
+    private PacManUI pacManThem2;
+    private PacManUI pacManThem3;
 
     /**
      * @return The game object this launcher will start when {@link #launch()}
@@ -159,7 +160,12 @@ public class Launcher {
         builder.addKey(KeyEvent.VK_UP, moveTowardsDirection(Direction.NORTH))
                 .addKey(KeyEvent.VK_DOWN, moveTowardsDirection(Direction.SOUTH))
                 .addKey(KeyEvent.VK_LEFT, moveTowardsDirection(Direction.WEST))
-                .addKey(KeyEvent.VK_RIGHT, moveTowardsDirection(Direction.EAST));
+                .addKey(KeyEvent.VK_RIGHT, moveTowardsDirection(Direction.EAST))
+                .addKey(KeyEvent.VK_W, moveTowardsDirection(Direction.NORTH))
+                .addKey(KeyEvent.VK_S, moveTowardsDirection(Direction.SOUTH))
+                .addKey(KeyEvent.VK_A, moveTowardsDirection(Direction.WEST))
+                .addKey(KeyEvent.VK_D, moveTowardsDirection(Direction.EAST));
+
     }
 
     private Action moveTowardsDirection(Direction direction) {
@@ -208,6 +214,73 @@ public class Launcher {
      *             When a resource could not be read.
      */
     public static void main(String[] args) throws IOException {
-        new Launcher().launch();
+        new Home();
     }
+
+    private Level makeLevel_1() {
+        try {
+            return getMapParser().parseMap("/board.txt");
+        } catch (IOException e) {
+            throw new PacmanConfigurationException(
+                "Unable to create level, name = " + "/board.txt", e);
+        }
+    }
+
+
+    public void launch_theme1() {
+        makeTheme_1();
+        PacManUiBuilder builder = new PacManUiBuilder().withDefaultButtons();
+        addSinglePlayerKeys(builder);
+        pacManThem1 = builder.build(getGame());
+        pacManThem1.start();
+    }
+
+    private Game makeTheme_1() {
+        GameFactory gf = getGameFactory();
+        Level level = makeLevel_1();
+        game = gf.createSinglePlayerGame(level, loadPointCalculator());
+        return game;
+    }
+
+
+    public void launch_theme2() {
+        makeTheme_2();
+        PacManUiBuilder builder = new PacManUiBuilder().withDefaultButtons();
+        addSinglePlayerKeys(builder);
+        pacManThem2 = builder.build(getGame());
+        pacManThem2.start();
+    }
+
+    private Game makeTheme_2() {
+        GameFactory gf = getGameFactory();
+        Level level = makeLevel_2();
+        game = gf.createSinglePlayerGame(level, loadPointCalculator());
+        return game;
+    }
+
+    private Level makeLevel_2() {
+        try {
+            return getMapParser().parseMap("/board.txt");
+        } catch (IOException e) {
+            throw new PacmanConfigurationException(
+                "Unable to create level, name = " + "/board.txt", e);
+        }
+    }
+
+    public void launch_theme3() {
+        makeTheme_2();
+        PacManUiBuilder builder = new PacManUiBuilder().withDefaultButtons();
+        addSinglePlayerKeys(builder);
+        pacManThem2 = builder.build(getGame());
+        pacManThem2.start();
+    }
+
+    public void launch_theme4() {
+        makeTheme_2();
+        PacManUiBuilder builder = new PacManUiBuilder().withDefaultButtons();
+        addSinglePlayerKeys(builder);
+        pacManThem2 = builder.build(getGame());
+        pacManThem2.start();
+    }
+
 }

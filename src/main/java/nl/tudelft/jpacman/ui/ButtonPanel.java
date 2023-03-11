@@ -1,10 +1,9 @@
 package nl.tudelft.jpacman.ui;
 
+import java.awt.*;
 import java.util.Map;
 
-import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JPanel;
+import javax.swing.*;
 
 /**
  * A panel containing a button for every registered action.
@@ -36,5 +35,6 @@ class ButtonPanel extends JPanel {
             });
             add(button);
         }
+
     }
 }

@@ -7,13 +7,16 @@ import java.util.Map;
 import nl.tudelft.jpacman.PacmanConfigurationException;
 import nl.tudelft.jpacman.board.Direction;
 import nl.tudelft.jpacman.npc.ghost.GhostColor;
-
+import nl.tudelft.jpacman.ui.Theme;
 /**
  * Sprite Store containing the classic Pac-Man sprites.
  *
  * @author Jeroen Roosen 
  */
 public class PacManSprites extends SpriteStore {
+
+
+    Theme themeSelector;
 
     /**
      * The sprite files are vertically stacked series for each direction, this
@@ -55,21 +58,70 @@ public class PacManSprites extends SpriteStore {
      * @return A map of animated Pac-Man sprites for all directions.
      */
     public Map<Direction, Sprite> getPacmanSprites() {
-        return directionSprite("/sprite/pacman.png", PACMAN_ANIMATION_FRAMES);
+        if(themeSelector.getTheme_() == 1){
+            return directionSprite("/sprite/pacman4.png", PACMAN_ANIMATION_FRAMES);
+        }
+        if(themeSelector.getTheme_() == 2){
+            return directionSprite("/sprite/pacman3.png", PACMAN_ANIMATION_FRAMES);
+        }
+        if(themeSelector.getTheme_() == 3){
+            return directionSprite("/sprite/pacman1.png", PACMAN_ANIMATION_FRAMES);
+        }
+        if(themeSelector.getTheme_() == 4){
+            return directionSprite("/sprite/pacman2.png", PACMAN_ANIMATION_FRAMES);
+        }
+        else {
+            return directionSprite("/sprite/pacman.png", PACMAN_ANIMATION_FRAMES);
+        }
+
     }
 
     /**
      * @return The animation of a dying Pac-Man.
      */
     public AnimatedSprite getPacManDeathAnimation() {
-        String resource = "/sprite/dead.png";
 
-        Sprite baseImage = loadSprite(resource);
-        AnimatedSprite animation = createAnimatedSprite(baseImage, PACMAN_DEATH_FRAMES,
-            ANIMATION_DELAY, false);
-        animation.setAnimating(false);
+        if (themeSelector.getTheme_() == 1) {
+            String resource = "/sprite/dead4.png";
+            Sprite baseImage = loadSprite(resource);
+            AnimatedSprite animation = createAnimatedSprite(baseImage, PACMAN_DEATH_FRAMES,
+                ANIMATION_DELAY, false);
+            animation.setAnimating(false);
+            return animation;
+        }
+        if (themeSelector.getTheme_() == 2) {
+            String resource = "/sprite/dead.png";
+            Sprite baseImage = loadSprite(resource);
+            AnimatedSprite animation = createAnimatedSprite(baseImage, PACMAN_DEATH_FRAMES,
+                ANIMATION_DELAY, false);
+            animation.setAnimating(false);
+            return animation;
+        }
+        if (themeSelector.getTheme_() == 3) {
+            String resource = "/sprite/dead1.png";
+            Sprite baseImage = loadSprite(resource);
+            AnimatedSprite animation = createAnimatedSprite(baseImage, PACMAN_DEATH_FRAMES,
+                ANIMATION_DELAY, false);
+            animation.setAnimating(false);
+            return animation;
+        }
+        if (themeSelector.getTheme_() == 4) {
+            String resource = "/sprite/dead2.png";
+            Sprite baseImage = loadSprite(resource);
+            AnimatedSprite animation = createAnimatedSprite(baseImage, PACMAN_DEATH_FRAMES,
+                ANIMATION_DELAY, false);
+            animation.setAnimating(false);
+            return animation;
+        }
+        else {
+            String resource = "/sprite/dead.png";
+            Sprite baseImage = loadSprite(resource);
+            AnimatedSprite animation = createAnimatedSprite(baseImage, PACMAN_DEATH_FRAMES,
+                ANIMATION_DELAY, false);
+            animation.setAnimating(false);
+            return animation;
+        }
 
-        return animation;
     }
 
     /**
@@ -107,30 +159,106 @@ public class PacManSprites extends SpriteStore {
     public Map<Direction, Sprite> getGhostSprite(GhostColor color) {
         assert color != null;
 
-        String resource = "/sprite/ghost_" + color.name().toLowerCase()
-            + ".png";
-        return directionSprite(resource, GHOST_ANIMATION_FRAMES);
+        if (themeSelector.getTheme_() == 1) {
+            String resource = "/sprite/ghost4_" + color.name().toLowerCase()
+                + ".png";
+            return directionSprite(resource, GHOST_ANIMATION_FRAMES);
+        }
+
+        if (themeSelector.getTheme_() == 2) {
+            String resource = "/sprite/ghost3_" + color.name().toLowerCase()
+                + ".png";
+            return directionSprite(resource, GHOST_ANIMATION_FRAMES);
+        }
+
+        if (themeSelector.getTheme_() == 3) {
+            String resource = "/sprite/ghost1_" + color.name().toLowerCase()
+                + ".png";
+            return directionSprite(resource, GHOST_ANIMATION_FRAMES);
+        }
+
+        if (themeSelector.getTheme_() == 4) {
+            String resource = "/sprite/ghost2_" + color.name().toLowerCase()
+                + ".png";
+            return directionSprite(resource, GHOST_ANIMATION_FRAMES);
+        }
+
+        else {
+            String resource = "/sprite/ghost_" + color.name().toLowerCase()
+                + ".png";
+            return directionSprite(resource, GHOST_ANIMATION_FRAMES);
+        }
     }
 
     /**
      * @return The sprite for the wall.
      */
     public Sprite getWallSprite() {
-        return loadSprite("/sprite/wall.png");
+
+        if (themeSelector.getTheme_() == 1) {
+            return loadSprite("/sprite/wall4.png");
+        }
+
+        if (themeSelector.getTheme_() == 2) {
+            return loadSprite("/sprite/wall3.png");
+        }
+
+        if (themeSelector.getTheme_() == 3) {
+            return loadSprite("/sprite/wall1.png");
+        }
+
+        if (themeSelector.getTheme_() == 4) {
+            return loadSprite("/sprite/wall2.png");
+        }
+
+        else {
+            return loadSprite("/sprite/wall.png");
+        }
     }
 
     /**
      * @return The sprite for the ground.
      */
     public Sprite getGroundSprite() {
-        return loadSprite("/sprite/floor.png");
+        if (themeSelector.getTheme_() == 1) {
+            return loadSprite("/sprite/floor4.png");
+        }
+        if (themeSelector.getTheme_() == 2) {
+            return loadSprite("/sprite/floor3.png");
+        }
+        if (themeSelector.getTheme_() == 3) {
+            return loadSprite("/sprite/floor1.png");
+        }
+        if (themeSelector.getTheme_() == 4) {
+            return loadSprite("/sprite/floor2.png");
+        }
+
+        else {
+            return loadSprite("/sprite/floor.png");
+        }
     }
 
     /**
      * @return The sprite for the
      */
     public Sprite getPelletSprite() {
-        return loadSprite("/sprite/pellet.png");
+
+        if (themeSelector.getTheme_() == 1) {
+            return loadSprite("/sprite/pao4.png");
+        }
+        if (themeSelector.getTheme_() == 2) {
+            return loadSprite("/sprite/pellet3.png");
+        }
+        if (themeSelector.getTheme_() == 3) {
+            return loadSprite("/sprite/candy1.png");
+        }
+        if (themeSelector.getTheme_() == 4) {
+            return loadSprite("/sprite/heart2.png");
+        }
+
+        else {
+            return loadSprite("/sprite/pellet.png");
+        }
     }
 
     /**
